@@ -99,17 +99,17 @@ function analyzeSalesData(data, options) {
     // @TODO: Назначение премий на основе ранжирования
     sellerStats.forEach((seller, index) => {
         seller.bonus = calculateBonus(index, sellerStats.length, seller)
-        seller.top_products = Object.entries(seller.products_sold).map(([sku, quantity]) => ({ "sku": sku, "quantity": quantity })).sort((a, b) => b.quantity - a.quantity).slice(0,10);
+        seller.top_products = Object.entries(seller.products_sold).map(([sku, quantity]) => ({ "sku": sku, "quantity": quantity })).sort((a, b) => b.sku - a.sku).slice(0,10);
     });
 
     // @TODO: Подготовка итоговой коллекции с нужными полями
     return sellerStats.map(seller => ({
         seller_id: seller.id, // Строка, идентификатор продавца
         name: seller.name, // Строка, имя продавца
-        revenue: seller.revenue.toFixed(2), // Число с двумя знаками после точки, выручка продавца
-        profit: seller.profit.toFixed(2), // Число с двумя знаками после точки, прибыль продавца
+        revenue: Number(seller.revenue.toFixed(2)), // Число с двумя знаками после точки, выручка продавца
+        profit: Number(seller.profit.toFixed(2)), // Число с двумя знаками после точки, прибыль продавца
         sales_count: seller.sales_count, // Целое число, количество продаж продавца
         top_products: seller.top_products, // Массив объектов вида: { "sku": "SKU_008","quantity": 10}, топ-10 товаров продавца
-        bonus: seller.bonus.toFixed(2) // Число с двумя знаками после точки, бонус продавца
+        bonus: Number(seller.bonus.toFixed(2)) // Число с двумя знаками после точки, бонус продавца
 })); 
 }
