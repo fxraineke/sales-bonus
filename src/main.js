@@ -8,7 +8,7 @@ function calculateSimpleRevenue(purchase, _product) {
    
    // @TODO: Расчет выручки от операции
    const { discount, sale_price, quantity } = purchase;
-   return sale_price * quantity * (1 - (discount / 100))
+   return (sale_price * quantity) * (1 - (discount / 100))
 }
 
 /**
@@ -110,6 +110,6 @@ function analyzeSalesData(data, options) {
         profit: seller.profit.toFixed(2), // Число с двумя знаками после точки, прибыль продавца
         sales_count: seller.sales_count, // Целое число, количество продаж продавца
         top_products: seller.top_products, // Массив объектов вида: { "sku": "SKU_008","quantity": 10}, топ-10 товаров продавца
-        bonus: seller.profit.toFixed(2) // Число с двумя знаками после точки, бонус продавца
+        bonus: seller.bonus.toFixed(2) // Число с двумя знаками после точки, бонус продавца
 })); 
 }
